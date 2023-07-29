@@ -1,9 +1,21 @@
 # Bharat-intern
 
-CAR PARKING:
+# CAR PARKING:
+
+The components are as follows:
+
+Arduino board (e.g., Arduino Uno, Arduino Nano, etc.): The main microcontroller that runs the code and controls the other components.
+
+Ultrasonic sensor: It consists of two components - a transmitter (triggerPin) and a receiver (echoPin). The sensor measures the time taken for an ultrasonic pulse to travel from the transmitter to an object and back to the receiver, which is then used to calculate the distance of the object from the sensor.
+
+LCD display: It is used to show the status of the parking spot (whether it is occupied or vacant). The LCD is connected using the LiquidCrystal library and is initialized with the pin configuration (12, 11, 5, 4, 3, 2).
+
+Servo motor: The servo motor is used to simulate the barrier/gate of the parking spot. It is connected to the servoPin (6) and controlled using the Servo library.
+
+These components work together to create a basic smart parking system. The ultrasonic sensor detects the presence of a vehicle in the parking spot, and the LCD display shows the status of the spot. If the spot is occupied, the barrier/gate is closed using the servo motor. If the spot is vacant, the barrier/gate is opened.
 
 
-AIR MONITORING SYSTEM:
+# AIR MONITORING SYSTEM:
 
 Components needed:
 Arduino Uno board
