@@ -1,0 +1,75 @@
+#include <LiquidCrystal.h>
+#include <Servo.h>
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+Servo servoMotor;
+
+const int triggerPin = 9;  
+const int echoPin = 10;    
+const int servoPin = 6;    
+
+void setup() {
+  lcd.begin(16, 2);
+  lcd.print("Smart Parking");
+  
+  pinMode(triggerPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  
+  servoMotor.attach(servoPin);
+  servoMotor.write(90); 
+  
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  long duration, distance;
+  
+ 
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+  
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration / 2) / 29.1;
+
+
+  int thresholdDistance = 30;
+
+  
+  if (distance < thresholdDistance)
+  {
+    lcd.setCursor(0, 1);
+    lcd.print("Occupied        ");
+    closeBarrier(); 
+  } 
+  else
+  {
+   
+    lcd.setCursor(0, 1);
+    lcd.print("Vacant          ");
+    openBarrier(); 
+  }
+}
+
+
+void closeBarrier() 
+{
+  for (int angle = 90; angle >= 0; angle--) 
+  {
+    servoMotor.write(angle);
+    delay(15); 
+  }
+}
+
+
+void openBarrier() 
+{
+  for (int angle = 0; angle <= 90; angle++) 
+  {
+    servoMotor.write(angle);
+    delay(15); 
+  }
+}
